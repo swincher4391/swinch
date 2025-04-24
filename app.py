@@ -43,6 +43,7 @@ def validate_etsy_order(order_number):
 
 # === UPDATE NOTION ===
 def update_notion(order_number, email, company, license_key, validated=True):
+    print("🚨 DATABASE_ID from env:", repr(DATABASE_ID))
     notion.pages.create(
         parent={"database_id": DATABASE_ID},
         properties={
