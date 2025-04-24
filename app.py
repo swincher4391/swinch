@@ -1,6 +1,4 @@
-# Generate a Flask app for webhook integration (ready to use with Render)
-
-flask_app = '''from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify
 from notion_client import Client as NotionClient
 import requests
 import time
@@ -70,7 +68,7 @@ def handle_webhook():
     if not all([order_number, email, company]):
         return jsonify({"error": "Missing required fields"}), 400
 
-    is_valid = True #validate_etsy_order(order_number)
+    is_valid = True  # Or: validate_etsy_order(order_number)
     license_key = generate_license_key(order_number)
 
     update_notion(order_number, email, company, license_key, validated=is_valid)
@@ -79,10 +77,4 @@ def handle_webhook():
 
 if __name__ == "__main__":
     app.run(debug=True)
-'''
 
-requirements_txt = '''flask
-notion-client
-requests
-gunicorn
-'''
