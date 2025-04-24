@@ -86,12 +86,3 @@ notion-client
 requests
 gunicorn
 '''
-
-# Write to files to be uploaded to user's GitHub repo
-with open("/mnt/data/app.py", "w") as app_file:
-    app_file.write(flask_app)
-
-with open("/mnt/data/requirements.txt", "w") as req_file:
-    req_file.write(requirements_txt)
-
-["/mnt/data/app.py", "/mnt/data/requirements.txt"]
