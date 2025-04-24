@@ -70,7 +70,7 @@ def handle_webhook():
     if not all([order_number, email, company]):
         return jsonify({"error": "Missing required fields"}), 400
 
-    is_valid = true #validate_etsy_order(order_number)
+    is_valid = True #validate_etsy_order(order_number)
     license_key = generate_license_key(order_number)
 
     update_notion(order_number, email, company, license_key, validated=is_valid)
