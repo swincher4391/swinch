@@ -61,14 +61,19 @@ def handle_webhook():
     data = request.json
     print("Received webhook:", data)
 
-    order_number = data.get("Order Number") or data.get("order_number")
-    email = data.get("Email") or data.get("email")
-    company = data.get("Company") or data.get("company")
+    # Get the 'fields' list
+    fields = data.get("data", {}).get("fields", [])
+
+    # Extract values by label
+    field_map = {field["label"]: field["value"] for field in fields}
+    order_number = field_map.get("Etsy Order Number")
+    email = field_map.get("Email")
+    company = field_map.get("Company Name")
 
     if not all([order_number, email, company]):
         return jsonify({"error": "Missing required fields"}), 400
 
-    is_valid = True  # Or: validate_etsy_order(order_number)
+    is_valid = True  # Or call validate_etsy_order(order_number)
     license_key = generate_license_key(order_number)
 
     update_notion(order_number, email, company, license_key, validated=is_valid)
