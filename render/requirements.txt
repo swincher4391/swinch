@@ -1,1 +1,4 @@
-
+flask
+notion-client
+requests
+gunicorn
